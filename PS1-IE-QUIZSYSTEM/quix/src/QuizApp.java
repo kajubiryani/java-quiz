@@ -18,7 +18,7 @@ public class QuizApp {
         Scanner scanner = new Scanner(System.in);
         int totalScore = 0;
 
-        // 🎉 Welcome
+        // Welcome
         System.out.println("=======================================");
         System.out.println("   WELCOME TO 3-STAGE APTITUDE TEST");
         System.out.println("=======================================\n");
@@ -26,7 +26,7 @@ public class QuizApp {
         System.out.println("Press ENTER to start...");
         scanner.nextLine();
 
-        // 📜 RULES PAGE
+        //  RULES PAGE
         System.out.println("\n============= RULES =============");
         System.out.println("• The test consists of 3 stages.");
         System.out.println("• Each stage has 5 multiple-choice questions.");
@@ -47,11 +47,11 @@ public class QuizApp {
         totalScore += runLevel(scanner, getLevel2Questions(), "STAGE 2: LOGICAL REASONING", 2);
         totalScore += runLevel(scanner, getLevel3Questions(), "STAGE 3: ABSTRACT THINKING", 3);
 
-        // 🏁 FINAL RESULT
+        // FINAL RESULT
         System.out.println("\n=======================================");
         System.out.println("FINAL SCORE: " + totalScore + " / 30");
 
-        // 🎯 PERFORMANCE MESSAGE
+        // PERFORMANCE MESSAGE
         if (totalScore < 10) {
             System.out.println("Performance: Needs Improvement. Keep practicing!");
         } else if (totalScore < 20) {

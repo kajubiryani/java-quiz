@@ -36,7 +36,7 @@ public class QuizApp {
         System.out.println("   - Stage 1: 1 point");
         System.out.println("   - Stage 2: 2 points");
         System.out.println("   - Stage 3: 3 points");
-        System.out.println("• Options are shuffled every time.");
+        //System.out.println("• Options are shuffled every time.");
         System.out.println("• Total maximum score = 30 points.");
         System.out.println("=================================\n");
 

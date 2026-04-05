@@ -25,14 +25,15 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+import javax.swing.ImageIcon;
 
 public class QuizApp {
 
-    private static final Color APP_BG = new Color(237, 242, 247);
-    private static final Color CARD_BG = new Color(255, 255, 255);
+    private static final Color APP_BG = new Color(80, 150, 220);
+    private static final Color CARD_BG = new Color(109, 123, 215);
     private static final Color PRIMARY = new Color(25, 118, 210);
-    private static final Color PRIMARY_DARK = new Color(13, 71, 161);
-    private static final Color MUTED_TEXT = new Color(86, 101, 115);
+    private static final Color PRIMARY_DARK = new Color(255, 255, 255);
+    private static final Color MUTED_TEXT = new Color(236, 236, 0);
     private static final int TIME_PER_QUESTION_SECONDS = 20;
 
     static class Question {
@@ -83,6 +84,9 @@ public class QuizApp {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(QuizApp::new);
+        // ImageIcon image= new ImageIcon("logo");
+        //        frame.setIconImage(image.getImage());
+
     }
 
     public QuizApp() {
@@ -137,9 +141,9 @@ public class QuizApp {
     }
 
     private void stylePrimaryButton(JButton button) {
-        button.setBackground(PRIMARY);
-        button.setForeground(Color.WHITE);
-        button.setFocusPainted(false);
+        button.setBackground(Color.CYAN);
+        button.setForeground(Color.BLACK);
+        button.setFocusPainted(true);
         button.setBorder(BorderFactory.createEmptyBorder(10, 18, 10, 18));
     }
 
@@ -202,22 +206,22 @@ public class QuizApp {
         title.setForeground(PRIMARY_DARK);
 
         JTextArea rulesText = new JTextArea(
-                "- The test consists of 3 stages.\n"
-                        + "- Each stage has 5 multiple-choice questions.\n"
-                        + "- Each question has 4 options.\n"
-                        + "- Stage 1 gives 1 point per correct answer.\n"
-                        + "- Stage 2 gives 2 points per correct answer.\n"
-                        + "- Stage 3 gives 3 points per correct answer.\n"
-                        + "- Maximum possible score is 30 points.\n"
-                        + "- Questions and options are shuffled each run.\n"
-                        + "- You have " + TIME_PER_QUESTION_SECONDS + " seconds per question.");
-        rulesText.setFont(font(Font.PLAIN, 17));
+                "                                     - The test consists of 3 stages.\n"
+                        + "                                     - Each stage has 5 multiple-choice questions.\n"
+                        + "                                     - Each question has 4 options.\n"
+                        + "                                     - Stage 1 gives 1 point per correct answer.\n"
+                        + "                                     - Stage 2 gives 2 points per correct answer.\n"
+                        + "                                     - Stage 3 gives 3 points per correct answer.\n"
+                        + "                                     - Maximum possible score is 30 points.\n"
+                        + "                                     - Questions and options are shuffled each run.\n"
+                        + "                                     - You have " + TIME_PER_QUESTION_SECONDS + " seconds per question.");
+        rulesText.setFont(font(Font.BOLD, 17));
         rulesText.setEditable(false);
         rulesText.setOpaque(false);
         rulesText.setLineWrap(true);
         rulesText.setWrapStyleWord(true);
         rulesText.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
-        rulesText.setForeground(new Color(40, 52, 64));
+        rulesText.setForeground(new Color(255, 255, 255));
 
         JButton beginButton = new JButton("Begin Test");
         beginButton.setFont(font(Font.BOLD, 17));
@@ -264,11 +268,11 @@ public class QuizApp {
 
         timerLabel = new JLabel("Time Left: " + TIME_PER_QUESTION_SECONDS + "s");
         timerLabel.setFont(font(Font.BOLD, 15));
-        timerLabel.setForeground(new Color(183, 28, 28));
+        timerLabel.setForeground(new Color(255, 0, 60));
 
         timerBar = new JProgressBar(0, TIME_PER_QUESTION_SECONDS);
         timerBar.setValue(TIME_PER_QUESTION_SECONDS);
-        timerBar.setForeground(new Color(230, 81, 0));
+        timerBar.setForeground(new Color(123, 81, 111));
         timerBar.setStringPainted(false);
 
         progressBar = new JProgressBar(0, 15);
@@ -291,7 +295,7 @@ public class QuizApp {
         quizQuestionText.setWrapStyleWord(true);
         quizQuestionText.setEditable(false);
         quizQuestionText.setFont(font(Font.PLAIN, 18));
-        quizQuestionText.setBackground(new Color(245, 247, 250));
+        quizQuestionText.setBackground(new Color(109, 123, 215));
         quizQuestionText.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(220, 224, 230)),
                 BorderFactory.createEmptyBorder(14, 14, 14, 14)));
@@ -543,14 +547,14 @@ public class QuizApp {
         list.add(new Question(
                 "A pattern follows this rule: The number of sides in the shape increases by one, and the number of dots inside the shape doubles. If the first shape is a triangle with 2 dots, what is the fourth shape?",
                 "Hexagon with 16 dots", Arrays.asList("Pentagon with 8 dots", "Hexagon with 8 dots",
-                        "Pentagon with 16 dots", "Hexagon with 16 dots")));
+                "Pentagon with 16 dots", "Hexagon with 16 dots")));
         list.add(new Question(
                 "A 3 x 3 x 3 cube is painted red on all outside faces. How many of the 1-unit small cubes have exactly two sides painted?",
                 "12", Arrays.asList("8", "12", "14", "18")));
         list.add(new Question(
                 "You are given a sequence of shapes: 1. A single line, 2. A 'V' shape, 3. A triangle, 4. A square. What is the next logical shape, and how many internal diagonals does it have?",
                 "Pentagon; 5 diagonals", Arrays.asList("Pentagon; 2 diagonals", "Hexagon; 5 diagonals",
-                        "Pentagon; 5 diagonals", "Hexagon; 9 diagonals")));
+                "Pentagon; 5 diagonals", "Hexagon; 9 diagonals")));
 
         return list;
     }

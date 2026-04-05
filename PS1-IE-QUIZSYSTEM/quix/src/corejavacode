@@ -1,0 +1,150 @@
+core java code
+import java.util.*;
+
+public class QuizApp {
+
+    static class Question {
+        String question;
+        String correctAnswer;
+        List<String> options;
+
+        Question(String question, String correctAnswer, List<String> options) {
+            this.question = question;
+            this.correctAnswer = correctAnswer;
+            this.options = options;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int totalScore = 0;
+
+        //Welcome
+        System.out.println("=======================================");
+        System.out.println("   WELCOME TO 3-STAGE APTITUDE TEST");
+        System.out.println("=======================================\n");
+
+        System.out.println("Press ENTER to start...");
+        scanner.nextLine();
+
+        //RULES PAGE
+        System.out.println("\n============= RULES =============");
+        System.out.println("• The test consists of 3 stages.");
+        System.out.println("• Each stage has 5 multiple-choice questions.");
+        System.out.println("• Each question has 4 options (A, B, C, D).");
+        System.out.println("• Type A/B/C/D to answer.");
+        System.out.println("• Points per correct answer:");
+        System.out.println("   - Stage 1: 1 point");
+        System.out.println("   - Stage 2: 2 points");
+        System.out.println("   - Stage 3: 3 points");
+        System.out.println("• Options are shuffled every time.");
+        System.out.println("• Total maximum score = 30 points.");
+        System.out.println("=================================\n");
+
+        System.out.println("Press ENTER to begin the test...");
+        scanner.nextLine();
+
+        totalScore += runLevel(scanner, getLevel1Questions(), "STAGE 1: BASIC MATH", 1);
+        totalScore += runLevel(scanner, getLevel2Questions(), "STAGE 2: LOGICAL REASONING", 2);
+        totalScore += runLevel(scanner, getLevel3Questions(), "STAGE 3: ABSTRACT THINKING", 3);
+
+        //FINAL RESULT
+        System.out.println("\n=======================================");
+        System.out.println("FINAL SCORE: " + totalScore + " / 30");
+
+        //PERFORMANCE MESSAGE
+        if (totalScore < 10) {
+            System.out.println("Performance: Needs Improvement. Keep practicing!");
+        } else if (totalScore < 20) {
+            System.out.println("Performance: Average. You can do better!");
+        } else if (totalScore < 30) {
+            System.out.println("Performance: Great Job! Well done!");
+        } else {
+            System.out.println("Performance: Perfect Score! Outstanding!");
+        }
+
+        System.out.println("=======================================");
+
+        scanner.close();
+    }
+
+    private static int runLevel(Scanner scanner, List<Question> questions, String levelName, int points) {
+        System.out.println("\n=======================================");
+        System.out.println(levelName);
+        System.out.println("=======================================");
+
+        System.out.println("Press ENTER to begin...");
+        scanner.nextLine();
+
+        Collections.shuffle(questions);
+
+        int score = 0;
+
+        for (int i = 0; i < questions.size(); i++) {
+            Question q = questions.get(i);
+
+            List<String> options = new ArrayList<>(q.options);
+            Collections.shuffle(options);
+
+            System.out.println("\nQ" + (i + 1) + ": " + q.question);
+
+            for (int j = 0; j < options.size(); j++) {
+                System.out.println((char) ('A' + j) + ") " + options.get(j));
+            }
+
+            System.out.print("Your answer: ");
+            String input = scanner.nextLine().toUpperCase();
+
+            int index = input.charAt(0) - 'A';
+
+            if (index >= 0 && index < 4 && options.get(index).equals(q.correctAnswer)) {
+                System.out.println("Correct! +" + points + " points");
+                score += points;
+            } else {
+                System.out.println("Wrong! Correct answer: " + q.correctAnswer);
+            }
+        }
+
+        System.out.println("Score in " + levelName + ": " + score + " points");
+        return score;
+    }
+
+    // LEVEL 1
+    private static List<Question> getLevel1Questions() {
+        List<Question> list = new ArrayList<>();
+
+        list.add(new Question("Solve for x: 3x + 12 = 45.", "11", Arrays.asList("9", "11", "13", "15")));
+        list.add(new Question("A jacket is on sale for 20% off. If the sale price is $80, what was the original price?", "$100", Arrays.asList("$90", "$96", "$100", "$120")));
+        list.add(new Question("A train travels at 60 km/h for 2 hours and then 90 km/h for the next 3 hours. What is the average speed for the entire journey?", "78 km/h", Arrays.asList("75 km/h", "78 km/h", "80 km/h", "82 km/h")));
+        list.add(new Question("If 5 machines can produce 5 widgets in 5 minutes, how many minutes does it take 100 machines to produce 100 widgets?", "5 minutes", Arrays.asList("1 minute", "5 minutes", "20 minutes", "100 minutes")));
+        list.add(new Question("A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost?", "$0.05", Arrays.asList("$0.05", "$0.10", "$0.15", "$1.00")));
+
+        return list;
+    }
+
+    // LEVEL 2
+    private static List<Question> getLevel2Questions() {
+        List<Question> list = new ArrayList<>();
+
+        list.add(new Question("Complete the sequence: 2, 6, 12, 20, 30, ?", "42", Arrays.asList("36", "40", "42", "48")));
+        list.add(new Question("If WATER is written as XBUFS, how is BLOOD written in that same code?", "CMPPE", Arrays.asList("AMNNC", "CMPPE", "CPPPE", "CNPPE")));
+        list.add(new Question("Pointing to a photograph, a man says, 'I have no brother or sister, but that man’s father is my father’s son.' Who is in the photograph?", "His son", Arrays.asList("His father", "His nephew", "His son", "Himself")));
+        list.add(new Question("In a race of 5 people (A, B, C, D, E): A finished ahead of B but behind C. D finished ahead of E but behind B. Who finished last?", "E", Arrays.asList("B", "C", "D", "E")));
+        list.add(new Question("In a group of 15 people, 7 read French, 8 read English, and 3 read both. How many people in the group read neither French nor English?", "3", Arrays.asList("2", "3", "4", "5")));
+
+        return list;
+    }
+
+    // LEVEL 3
+    private static List<Question> getLevel3Questions() {
+        List<Question> list = new ArrayList<>();
+
+        list.add(new Question("Find the odd one out among the following units of measurement.", "Ounce", Arrays.asList("Inch", "Ounce", "Centimeter", "Yard")));
+        list.add(new Question("If a clock shows exactly 3:00, what is the interior angle between the hour hand and the minute hand?", "90°", Arrays.asList("45°", "60°", "90°", "120°")));
+        list.add(new Question("A pattern follows this rule: The number of sides in the shape increases by one, and the number of dots inside the shape doubles. If the first shape is a triangle with 2 dots, what is the fourth shape?", "Hexagon with 16 dots", Arrays.asList("Pentagon with 8 dots", "Hexagon with 8 dots", "Pentagon with 16 dots", "Hexagon with 16 dots")));
+        list.add(new Question("A 3 x 3 x 3 cube is painted red on all outside faces. How many of the 1-unit small cubes have exactly two sides painted?", "12", Arrays.asList("8", "12", "14", "18")));
+        list.add(new Question("You are given a sequence of shapes: 1. A single line, 2. A 'V' shape, 3. A triangle, 4. A square. What is the next logical shape, and how many internal diagonals does it have?", "Pentagon; 5 diagonals", Arrays.asList("Pentagon; 2 diagonals", "Hexagon; 5 diagonals", "Pentagon; 5 diagonals", "Hexagon; 9 diagonals")));
+
+        return list;
+    }
+}

@@ -26,13 +26,18 @@ public class SimpleQuiz {
 
     //rules
     static void showRules() {
-        System.out.println("\n===== RULES =====");
-        System.out.println("• 3 stages, 5 questions each");
-        System.out.println("• Answer using A/B/C/D");
-        System.out.println("• Stage 1 = 1 mark");
-        System.out.println("• Stage 2 = 2 marks");
-        System.out.println("• Stage 3 = 3 marks");
-        System.out.println("=================");
+        System.out.println("\n============= RULES =============");
+        System.out.println("• The test consists of 3 stages.");
+        System.out.println("• Each stage has 5 multiple-choice questions.");
+        System.out.println("• Each question has 4 options (A, B, C, D).");
+        System.out.println("• Type A/B/C/D to answer.");
+        System.out.println("• Points per correct answer:");
+        System.out.println("   - Stage 1: 1 point");
+        System.out.println("   - Stage 2: 2 points");
+        System.out.println("   - Stage 3: 3 points");
+        System.out.println("• Options are shuffled every time.");
+        System.out.println("• Total maximum score = 30 points.");
+        System.out.println("=================================\n");
         System.out.println("Press ENTER to continue...");
         sc.nextLine();
     }
@@ -40,7 +45,7 @@ public class SimpleQuiz {
     //main stage to run
     static int runStage(String[][] data, String stageName, int points) {
 
-        shuffleQuestions(data); 
+        shuffleQuestions(data);
 
         System.out.println("\n=================================");
         System.out.println(stageName);
@@ -55,7 +60,7 @@ public class SimpleQuiz {
             String[] options = {data[i][1], data[i][2], data[i][3], data[i][4]};
             String correct = data[i][5];
 
-            shuffleOptions(options); 
+            shuffleOptions(options);
 
             System.out.println("A) " + options[0]);
             System.out.println("B) " + options[1]);
@@ -146,8 +151,8 @@ public class SimpleQuiz {
                 {"Find the odd one out among the following units of measurement.", "Inch", "Ounce", "Centimeter", "Yard", "Ounce"},
                 {"If a clock shows exactly 3:00, what is the interior angle between the hour and minute hand?", "45°", "60°", "90°", "120°", "90°"},
                 {"A pattern: sides increase by 1, dots double. If first is triangle with 2 dots, what is 4th shape?", "Pentagon with 8 dots", "Hexagon with 8 dots", "Pentagon with 16 dots", "Hexagon with 16 dots", "Hexagon with 16 dots"},
-                {"A 3×3×3 cube is painted. How many small cubes have exactly two sides painted?", "8", "12", "14", "18", "12"},
-                {"Sequence of shapes: line → V → triangle → square. Next shape and diagonals?", "Pentagon; 2 diagonals", "Hexagon; 5 diagonals", "Pentagon; 5 diagonals", "Hexagon; 9 diagonals", "Pentagon; 5 diagonals"}
+                {"A 3X3X3 cube is painted. How many small cubes have exactly two sides painted?", "8", "12", "14", "18", "12"},
+                {"Sequence of shapes: line, V, triangle, square. Next shape and diagonals?", "Pentagon; 2 diagonals", "Hexagon; 5 diagonals", "Pentagon; 5 diagonals", "Hexagon; 9 diagonals", "Pentagon; 5 diagonals"}
         };
     }
 }

@@ -1,93 +1,66 @@
 import java.util.Scanner;
-
-public class SimpleQuiz {
-
+public class SimpleQuiz{
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
-
-        int totalScore = 0;
-
-        System.out.println("=================================");
-        System.out.println("WELCOME TO 3 STAGE APTITUDE TEST");
-        System.out.println("=================================");
-
-        System.out.println("Press ENTER to start...");
-        sc.nextLine();
-
-        showRules();
-
-        totalScore += runStage(getStage1(), "STAGE 1: BASIC MATH", 1);
-        totalScore += runStage(getStage2(), "STAGE 2: LOGICAL REASONING", 2);
-        totalScore += runStage(getStage3(), "STAGE 3: ABSTRACT THINKING", 3);
-
-        showResult(totalScore);
-    }
-
-    //rules
-    static void showRules() {
-        System.out.println("\n============= RULES =============");
-        System.out.println("• The test consists of 3 stages.");
-        System.out.println("• Each stage has 5 multiple-choice questions.");
-        System.out.println("• Each question has 4 options (A, B, C, D).");
-        System.out.println("• Type A/B/C/D to answer.");
-        System.out.println("• Points per correct answer:");
+    //rulesfunction
+    static void showrules(){
+        System.out.println("\\n============= RULES =============");
+        System.out.println("~ The test consists of 3 stages.");
+        System.out.println("~ Each stage has 5 multiple-choice questions.");
+        System.out.println("~ Each question has 4 options (A, B, C, D).");
+        System.out.println("~ Type A/B/C/D to answer.");
+        System.out.println("~ Points per correct answer:");
         System.out.println("   - Stage 1: 1 point");
         System.out.println("   - Stage 2: 2 points");
         System.out.println("   - Stage 3: 3 points");
-        System.out.println("• Options are shuffled every time.");
-        System.out.println("• Total maximum score = 30 points.");
+        System.out.println("~ Options are shuffled every time.");
+        System.out.println("~ Total maximum score = 30 points.");
         System.out.println("=================================\n");
-        System.out.println("Press ENTER to continue...");
+        System.out.println("PRESS ENTER TO CONTINUE...");
         sc.nextLine();
     }
 
-    //main stage to run
-    static int runStage(String[][] data, String stageName, int points) {
-
-        shuffleQuestions(data);
+    //center logic
+    static int runstage(String[][] data, String stagename, int points){
+        shufflequestions(data);
 
         System.out.println("\n=================================");
-        System.out.println(stageName);
+        System.out.println(stagename);
         System.out.println("=================================");
 
-        int score = 0;
-
-        for (int i = 0; i < data.length; i++) {
-
+        int score=0;
+        for (int i=0; i<data.length; i++){
             System.out.println("\nQ" + (i + 1) + ": " + data[i][0]);
 
             String[] options = {data[i][1], data[i][2], data[i][3], data[i][4]};
             String correct = data[i][5];
+            shuffleoptions(options);
 
-            shuffleOptions(options);
+            System.out.println("A] " + options[0]);
+            System.out.println("B] " + options[1]);
+            System.out.println("C] " + options[2]);
+            System.out.println("D] " + options[3]);
 
-            System.out.println("A) " + options[0]);
-            System.out.println("B) " + options[1]);
-            System.out.println("C) " + options[2]);
-            System.out.println("D) " + options[3]);
-
-            System.out.print("Your answer: ");
+            System.out.println("Your Answer: ");
             char ans = sc.next().toUpperCase().charAt(0);
 
-            int index = ans - 'A';
+            int index= ans - 'A';
 
-            if (index >= 0 && index < 4 && options[index].equals(correct)) {
+            if (index >= 0 && index < 4 && options[index].equals(correct)){
                 score += points;
-                System.out.println("Correct! +" + points + " points");
+                System.out.println("Correct! +" + points + "Points");
             } else {
-                System.out.println("Wrong! Correct answer: " + correct);
+                System.out.println("Wrong! Correct Answer: " + correct);
             }
         }
-
-        System.out.println("Score in " + stageName + ": " + score);
+        System.out.println("Score in " + stagename + ": " + score);
         return score;
     }
 
-    //shuffle logic for questions
-    static void shuffleQuestions(String[][] data) {
-        for (int i = 0; i < data.length; i++) {
-            int j = (int)(Math.random() * data.length);
+    //questionshuffle
+    static void shufflequestions(String[][] data){
+        for (int i=0; i<data.length; i++){
+            int j = (int)(Math.random()*data.length);
 
             String[] temp = data[i];
             data[i] = data[j];
@@ -95,27 +68,26 @@ public class SimpleQuiz {
         }
     }
 
-    //shuffle logic for options
-    static void shuffleOptions(String[] options) {
-        for (int i = 0; i < options.length; i++) {
-            int j = (int)(Math.random() * options.length);
-
+    //optionshuffle
+    static void shuffleoptions(String[] options){
+        for (int i = 0; i<options.length; i++){
+            int j = (int)(Math.random()*options.length);
             String temp = options[i];
             options[i] = options[j];
             options[j] = temp;
         }
     }
 
-    //score feedback
-    static void showResult(int totalScore) {
+    //scorefeedback
+    static void showresult(int totalscore) {
         System.out.println("\n=================================");
-        System.out.println("FINAL SCORE: " + totalScore + "/30");
+        System.out.println("FINAL SCORE: " + totalscore + "/30");
 
-        if (totalScore < 10)
+        if (totalscore < 10)
             System.out.println("Performance: Needs Improvement");
-        else if (totalScore < 20)
+        else if (totalscore < 20)
             System.out.println("Performance: Average");
-        else if (totalScore < 30)
+        else if (totalscore < 30)
             System.out.println("Performance: Great Job");
         else
             System.out.println("Performance: Perfect Score!");
@@ -123,8 +95,8 @@ public class SimpleQuiz {
         System.out.println("=================================");
     }
 
-    //stage 1
-    static String[][] getStage1() {
+    //stage 1 set
+    static String[][] getstage1() {
         return new String[][] {
                 {"Solve for x: 3x + 12 = 45.", "9", "11", "13", "15", "11"},
                 {"A jacket is on sale for 20% off. If the sale price is $80, what was the original price?", "$90", "$96", "$100", "$120", "$100"},
@@ -134,8 +106,8 @@ public class SimpleQuiz {
         };
     }
 
-    //stage 2
-    static String[][] getStage2() {
+    //stage 2 set
+    static String[][] getstage2() {
         return new String[][] {
                 {"Complete the sequence: 2, 6, 12, 20, 30, ?", "36", "40", "42", "48", "42"},
                 {"If WATER is written as XBUFS, how is BLOOD written in that same code?", "AMNNC", "CMPPE", "CPPPE", "CNPPE", "CMPPE"},
@@ -145,8 +117,8 @@ public class SimpleQuiz {
         };
     }
 
-    //stage 3
-    static String[][] getStage3() {
+    //stage 3 set
+    static String[][] getstage3() {
         return new String[][] {
                 {"Find the odd one out among the following units of measurement.", "Inch", "Ounce", "Centimeter", "Yard", "Ounce"},
                 {"If a clock shows exactly 3:00, what is the interior angle between the hour and minute hand?", "45°", "60°", "90°", "120°", "90°"},
@@ -154,5 +126,24 @@ public class SimpleQuiz {
                 {"A 3X3X3 cube is painted. How many small cubes have exactly two sides painted?", "8", "12", "14", "18", "12"},
                 {"Sequence of shapes: line, V, triangle, square. Next shape and diagonals?", "Pentagon; 2 diagonals", "Hexagon; 5 diagonals", "Pentagon; 5 diagonals", "Hexagon; 9 diagonals", "Pentagon; 5 diagonals"}
         };
+    }
+
+    //main function
+    public static void main(String[] args){
+
+        int totalscore = 0;
+        System.out.println("=================================");
+        System.out.println("WELCOME TO 3 STAGE APTITUDE TEST.");
+        System.out.println("=================================");
+        System.out.println("PRESS ENTER TO START...");
+        sc.nextLine();
+
+        showrules();
+
+        totalscore += runstage(getstage1(), "STAGE 1: BASIC MATHS", 1);
+        totalscore += runstage(getstage2(), "STAGE 2: LOGICAL REASONING", 2);
+        totalscore += runstage(getstage3(), "STAGE 3: ABSTRACT THINKING", 3);
+
+        showresult(totalscore);
     }
 }
